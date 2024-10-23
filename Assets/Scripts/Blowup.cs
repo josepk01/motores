@@ -21,5 +21,21 @@ public class Blowup : MonoBehaviour
     {
         GameManager.Instance.OnBubbleDestroyed();
         Destroy(gameObject);
+
+        ////-------------OPCIONAL----------------
+        ////PROTOTIPO DE FALSA DIVISION DE POMPAS (la nueva pompa llega a dividirse infinitamente)
+        //if (timesBroken < maxBreaks)
+        //{
+        //    GameObject sucessor = child;
+        //    sucessor.transform.localScale *= 0.5f;
+        //    timesBroken++;
+
+        //    Instantiate(sucessor, transform.position, transform.rotation);
+        //}
+        //else
+        //{
+        //    GameManager.instance.OnBubbleDamaged();
+        //    Destroy(this.gameObject);
+        //}
     }
 }

@@ -5,8 +5,11 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    private int bubbleCount = 0;
+    private int bubbleCount = 4;
     public UIManager uiManager;
+
+    [SerializeField]
+    private int lives = 1;
 
     private void Awake()
     {
@@ -21,7 +24,7 @@ public class GameManager : MonoBehaviour
     public void OnBubbleDestroyed()
     {
         bubbleCount--;
-        if (bubbleCount == 0)
+        if (bubbleCount <= 0)
         {
             uiManager.Inform("You Win!", Color.green);
         }
@@ -29,6 +32,16 @@ public class GameManager : MonoBehaviour
 
     public void OnPlayerDamaged()
     {
-        uiManager.Inform("You Lose!", Color.red);
+        lives--;
+        if (lives <= 0)
+        {
+
+            uiManager.Inform("You Lose!", Color.red);
+        }
+
+    }
+    public int getLives()
+    {
+        return lives;
     }
 }
