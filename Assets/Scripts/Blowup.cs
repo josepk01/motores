@@ -15,6 +15,7 @@ public class Blowup : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         Vector2 force = initialForceDirection.normalized * initialForceMagnitude;
         rb.AddForce(force, ForceMode2D.Impulse);
+        GameManager.Instance.OnBubbleCreated();
     }
 
     public void Burst()

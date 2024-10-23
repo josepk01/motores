@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    private int bubbleCount = 4;
+    private int bubbleCount;
     public UIManager uiManager;
 
     [SerializeField]
@@ -13,7 +13,15 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+        bubbleCount = 0;
     }
 
     public void OnBubbleCreated()
