@@ -1,40 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BulletMovement : MonoBehaviour
 {
+    [SerializeField] private float speed = 10f;
+    [SerializeField] private float maxHeight = 10f;
 
-    private float impulse = 10.0f;
-    private float alturaMax = 5.0f;
-    private Vector2 direction = Vector2.up;
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        direction *= impulse;
-    }
+        // Mover la bala hacia arriba
+        transform.position += Vector3.up * speed * Time.deltaTime;
 
-    // Update is called once per frame
-    void Update()
-    {
-        transform.Translate(direction*Time.deltaTime);
-        if (transform.position.y > alturaMax)
+        // Destruir cuando supera cierto valor
+        if (transform.position.y > maxHeight)
         {
             Destroy(gameObject);
         }
-        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<Blowup>()!=null) {
-
-            collision.gameObject.GetComponent<Blowup>().burst();
-            Destroy(gameObject);
+        Blowup bubble = collision.gameObject.GetComponent<Blowup>();
+        if (bubble != null)
+        {
+            bubble.Burst();
+            Destroy(gameObject); // Destruir la bala
         }
     }
-
 }
-
-

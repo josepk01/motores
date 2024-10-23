@@ -4,21 +4,9 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void Harm()
     {
-        //llamar a gamemanager
-        GameManager.instance.OnPlayerDamaged();
-        Debug.Log("QuitaVida");
+        GameManager.Instance.OnPlayerDamaged();
+        Destroy(gameObject); // Destruir el jugador
     }
 }

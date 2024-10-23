@@ -1,49 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 public class Blowup : MonoBehaviour
 {
-    [SerializeField]
-    private Vector3 initialForceDirection = Vector3.right;
-    [SerializeField]
-    private int initialForceMagnitude = 5;
-    [SerializeField]
-    private GameObject child;
-    
-    private int timesBroken;
-    [SerializeField]
-    private int maxBreaks;
+    [SerializeField] public Vector2 initialForceDirection;
+    [SerializeField] public float initialForceMagnitude;
 
-    Rigidbody2D rb2d;
-    // Start is called before the first frame update
-    void Start()
+    private Rigidbody2D rb;
+
+    private void Start()
     {
-        
-        rb2d = GetComponent<Rigidbody2D>();
-        if(rb2d != null)
-        {
-            rb2d.AddForce(initialForceDirection.normalized*initialForceMagnitude);
-        }
-        GameManager.instance.OnBubbleCreated();
+        rb = GetComponent<Rigidbody2D>();
+        Vector2 force = initialForceDirection.normalized * initialForceMagnitude;
+        rb.AddForce(force, ForceMode2D.Impulse);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Burst()
     {
-        
-    }
-
-    //cuando explota
-    public void burst()
-    {
-
-
-        //Comentar si se descomenta lo opcional
-        GameManager.instance.OnBubbleDamaged();
-        Destroy(this.gameObject);
-
+        GameManager.Instance.OnBubbleDestroyed();
+        Destroy(gameObject);
 
         ////-------------OPCIONAL----------------
         ////PROTOTIPO DE FALSA DIVISION DE POMPAS (la nueva pompa llega a dividirse infinitamente)
@@ -61,6 +38,4 @@ public class Blowup : MonoBehaviour
         //    Destroy(this.gameObject);
         //}
     }
-
-
 }

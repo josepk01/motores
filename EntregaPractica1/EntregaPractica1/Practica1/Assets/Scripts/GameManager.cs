@@ -4,85 +4,44 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance { get; private set; }
-    //En caso de querer jugar con vidas
-    [SerializeField]
-    private int lives = 3;
-
-    private int numpompas;
-    private bool finished=false;
+    public static GameManager Instance;
+    private int bubbleCount = 4;
+    public UIManager uiManager;
 
     [SerializeField]
-    GameObject player;
-    [SerializeField]
-    UIManager uimng;
+    private int lives = 1;
+
     private void Awake()
     {
-        if (instance != null && instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            instance = this;
-        }
-        numpompas = 0;
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //si te quedas sin vidas pierdes
-        if (lives <= 0 &&player!=null&&!finished)
-        {
-            //fin del juego
-            uimng.Inform("Has Perdido");
-            Destroy(player);
-            finished = true;
-            Debug.Log(player==null);
-        }
-        //if (player == null)
-        //{
-        //    Debug.Log("destruido");
-        //}
-        if (numpompas == 0 && !finished)
-        {
-            uimng.Inform("Has Ganado");
-            finished = true;
-        }
-
-    }
-
-    public void OnPlayerDamaged()
-    {
-        if (!finished)
-        {
-            lives--;
-            Debug.Log(lives);
-        }
+        Instance = this;
     }
 
     public void OnBubbleCreated()
     {
-        numpompas++;
+        bubbleCount++;
     }
 
-    public void OnBubbleDamaged()
+    public void OnBubbleDestroyed()
     {
-        
-        numpompas--;
-       
+        bubbleCount--;
+        if (bubbleCount <= 0)
+        {
+            uiManager.Inform("You Win!", Color.green);
+        }
     }
 
+    public void OnPlayerDamaged()
+    {
+        lives--;
+        if (lives <= 0)
+        {
+
+            uiManager.Inform("You Lose!", Color.red);
+        }
+
+    }
     public int getLives()
     {
         return lives;
     }
-
-
 }
