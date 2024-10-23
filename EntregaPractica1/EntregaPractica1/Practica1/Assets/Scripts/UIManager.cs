@@ -5,8 +5,8 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField]
     Text livesText;
-
-    public Text messageText;
+    [SerializeField]
+    Text messageText;
 
     private void Start()
     {
