@@ -495,7 +495,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5, y: 1}
+  m_Size: {x: 1, y: 2}
   m_Direction: 0
 --- !u!4 &432282551
 Transform:
@@ -1370,7 +1370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -1601,15 +1601,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2e281d503bac2a4f845a9d761f37daa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bubblePrefab: {fileID: 6995343829605214894, guid: 8bdf162c56470f44bbf6ecc6f25ef1da, type: 3}
-  minBubbles: 3
-  maxBubbles: 5
-  leftWall: {fileID: 213441807}
-  rightWall: {fileID: 890791584}
-  roof: {fileID: 746330473}
-  floor: {fileID: 604929756}
-  minForce: 2
-  maxForce: 5
 --- !u!4 &1585004317
 Transform:
   m_ObjectHideFlags: 0
