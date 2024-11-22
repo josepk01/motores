@@ -4,25 +4,27 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-    public Text bestTimeText; // Referencia al texto donde se mostrará el tiempo mínimo.
-    public Button playButton; // Referencia al botón de "Jugar".
+    [SerializeField]
+    private Text bestTimeText;
+    [SerializeField]// Referencia al texto donde se mostrará el tiempo mínimo.
+    private Button playButton; // Referencia al botón de "Jugar".
 
-    private float bestTime = -1f; // Variable para almacenar el tiempo mínimo. -1 significa que no hay un tiempo aún.
+    private bool updatedTime = false;
+
+    private string bestTime = " "; // Variable para almacenar el tiempo mínimo. -1 significa que no hay un tiempo aún.
 
     void Start()
     {
-        // Si existe el mejor tiempo, actualizar el texto
-        if (bestTime > 0)
-        {
-            bestTimeText.text = "Mejor tiempo: " + bestTime.ToString("F2") + " s";
-        }
-        else
-        {
-            bestTimeText.text = "No se ha ganado ninguna partida.";
-        }
-
+        
         // Añadir listener al botón para cargar la escena de juego
         playButton.onClick.AddListener(Jugar);
+    }
+    private void Update()
+    {
+        if (!updatedTime)
+        {
+            SetBestTime();
+        }
     }
 
     public void Jugar()
@@ -32,11 +34,23 @@ public class MenuManager : MonoBehaviour
     }
 
     // Método para actualizar el mejor tiempo cuando se gana una partida
-    public void UpdateBestTime(float newTime)
+    public void GetBestTime()
     {
-        if (bestTime < 0 || newTime < bestTime)
+        Debug.Log("primero");
+        bestTime =GameManager.Instance.GetBestTime();
+    }
+
+    public void SetBestTime()
+    {
+        GetBestTime();
+        // Si existe el mejor tiempo, actualizar el texto
+        if (bestTime != " ")
         {
-            bestTime = newTime;
+            bestTimeText.text = "Mejor tiempo: " + bestTime;
+        }
+        else
+        {
+            bestTimeText.text = "No se ha ganado ninguna partida.";
         }
     }
 }
