@@ -50,6 +50,8 @@ public class GameManager : MonoBehaviour
         if (bubbleCount <= 0)
         {
             uiManager.Inform("You Win!", Color.green);
+            PauseTimer();
+            tmr.SetBestTime(tmr.GetCurrFloatTime());
         }
     }
 
@@ -58,7 +60,7 @@ public class GameManager : MonoBehaviour
         lives--;
         if (lives <= 0)
         {
-
+            PauseTimer();
             uiManager.Inform("You Lose!", Color.red);
         }
 
@@ -93,12 +95,30 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void setUiManager()
+    public void setUiManager(UIManager uimg)
     {
         if(uiManager == null)
         {
-            //uiManager= 
+            uiManager = uimg;
         }
     }
-    
+
+    public void restartBubbles()
+    {
+        bubbleCount = 0;
+    }
+
+    public void PauseTimer()
+    {
+        tmr.StopTimer();
+    }
+    public void ResumeTimer()
+    {
+        tmr.ResumeTimer();
+    }
+    public void RestartTimer()
+    {
+        tmr.RestartTimer();
+    }
+
 }

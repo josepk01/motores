@@ -19,7 +19,7 @@ public class Timer : MonoBehaviour
     {
 
         timer = 0;
-        ResumeTimer();
+        //ResumeTimer();
     }
 
     // Update is called once per frame
@@ -77,7 +77,7 @@ public class Timer : MonoBehaviour
 
     public void SetBestTime(float time)
     {
-        if(time < bestTime || bestTime == 0)
+        if(time < bestTime || bestTime <= 0)
         {
             bestTime = time;
         }
@@ -113,6 +113,10 @@ public class Timer : MonoBehaviour
     public float GetSeconds()
     {
         return sec;
+    }
+    public float GetCurrFloatTime()
+    {
+        return timer;
     }
 
    

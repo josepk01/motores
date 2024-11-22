@@ -9,27 +9,28 @@ public class MenuManager : MonoBehaviour
     [SerializeField]// Referencia al texto donde se mostrará el tiempo mínimo.
     private Button playButton; // Referencia al botón de "Jugar".
 
-    private bool updatedTime = false;
+    //private bool updatedTime = false;
 
     private string bestTime = " "; // Variable para almacenar el tiempo mínimo. -1 significa que no hay un tiempo aún.
 
     void Start()
     {
-        
+        SetBestTime();
         // Añadir listener al botón para cargar la escena de juego
         playButton.onClick.AddListener(Jugar);
     }
     private void Update()
     {
-        if (!updatedTime)
-        {
-            SetBestTime();
-        }
+        //if (!updatedTime)
+        //{
+        //    SetBestTime();
+        //}
     }
 
     public void Jugar()
     {
         // Cargar la escena del juego
+        GameManager.Instance.ResumeTimer();
         SceneManager.LoadScene("Juego");
     }
 
@@ -52,6 +53,6 @@ public class MenuManager : MonoBehaviour
         {
             bestTimeText.text = "No se ha ganado ninguna partida.";
         }
-        updatedTime = true;
+        //updatedTime = true;
     }
 }
