@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletMovement : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
-    [SerializeField] private float maxHeight = 10f;
+    [SerializeField] private float maxHeight = 5f;
 
     private void Update()
     {

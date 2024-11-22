@@ -17,6 +17,7 @@ public class Blowup : MonoBehaviour
     private float minTam;
 
     bool velSet = false;
+    bool counted = false;
 
 
     Rigidbody2D rb2d;
@@ -57,7 +58,11 @@ public class Blowup : MonoBehaviour
             }
 
         }
-        GameManager.Instance.OnBubbleCreated();
+        if (!counted)
+        {
+            GameManager.Instance.OnBubbleCreated();
+            counted = true;
+        }
 
     }
 

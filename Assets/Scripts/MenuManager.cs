@@ -52,5 +52,6 @@ public class MenuManager : MonoBehaviour
         {
             bestTimeText.text = "No se ha ganado ninguna partida.";
         }
+        updatedTime = true;
     }
 }

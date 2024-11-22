@@ -5,13 +5,15 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    [SerializeField]
     private int bubbleCount;
     [SerializeField]
     private UIManager uiManager;
+    
 
     [SerializeField]
     private int lives = 1;
-
+    [SerializeField]
     private Timer tmr;
 
     private void Awake()
@@ -30,11 +32,11 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        if (gameObject.GetComponent<Timer>() != null)
-        {
-            tmr = gameObject.GetComponent<Timer>();
-            Debug.Log("Llega");
-        }
+        //if (gameObject.GetComponent<Timer>() != null)
+        //{
+        //    tmr = gameObject.GetComponent<Timer>();
+        //    Debug.Log("Llega");
+        //}
     }
 
     public void OnBubbleCreated()
@@ -90,4 +92,13 @@ public class GameManager : MonoBehaviour
             return "No tiene el timer asignado";
         }
     }
+
+    public void setUiManager()
+    {
+        if(uiManager == null)
+        {
+            //uiManager= 
+        }
+    }
+    
 }
