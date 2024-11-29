@@ -10,6 +10,25 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float playerWidth = 0.5f;  // Grosor del jugador
     [SerializeField] private float playAreaWidth = 16f; // Ancho visible (-8 a 8)
     [SerializeField] private float wallThickness = 0.5f; // Grosor de las paredes
+    private SpriteRenderer spRend;
+    private Animator animMng;
+    [SerializeField]
+    private bool shootOn=false;
+    
+
+
+
+    private void Start()
+    {
+        if(gameObject.GetComponent<SpriteRenderer>() != null)
+        {
+            spRend = gameObject.GetComponent<SpriteRenderer>();
+        }
+        if (gameObject.GetComponent<Animator>() != null)
+        {
+            animMng = gameObject.GetComponent<Animator>();
+        }
+    }
 
     private void Update()
     {
@@ -24,6 +43,36 @@ public class PlayerMovement : MonoBehaviour
         // Limitar movimiento dentro del área visible
         float halfWidth = playAreaWidth / 2f - wallThickness - playerWidth / 2f;
         newPosition.x = Mathf.Clamp(newPosition.x, -halfWidth, halfWidth);
+        if(spRend != null)
+        {
+            if (Input.GetKey(KeyCode.RightArrow)|| Input.GetKey(KeyCode.D))
+            {
+                animMng.SetBool("moving", true);
+                spRend.flipX = false;
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow)|| Input.GetKey(KeyCode.A))
+            {
+                animMng.SetBool("moving", true);
+                spRend.flipX = true;
+            }
+            else
+            {
+                animMng.SetBool("moving", false);
+            }
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                animMng.SetTrigger("Shoot");
+                shootOn = true;
+            }
+            else if(shootOn)
+            {
+                shootOn = false;
+                animMng.ResetTrigger("Shoot");
+            }
+
+        }
+        
 
         transform.position = newPosition;
     }
